@@ -1,11 +1,8 @@
 package com.example.apath.newcustomlauncher;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.drm.ProcessedData;
-import android.os.AsyncTask;
-import android.provider.DocumentsContract;
-import android.util.Log;
 
+import android.os.AsyncTask;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,7 +10,6 @@ import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 

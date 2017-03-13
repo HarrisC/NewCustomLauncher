@@ -33,20 +33,6 @@ public class AppsListActivity extends Activity {
     static PackageManager manager;
     public static List<AppDetail> apps;
     private void loadApps(){
-        /*manager = getPackageManager();
-        apps = new ArrayList<AppDetail>();
-
-        Intent i = new Intent(Intent.ACTION_MAIN, null);
-        i.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        List<ResolveInfo> availableActivities = manager.queryIntentActivities(i, 0);
-        for(ResolveInfo ri:availableActivities){
-            AppDetail app = new AppDetail();
-            app.label = ri.loadLabel(manager).toString();
-            app.name = ri.activityInfo.packageName;
-            app.icon = ri.activityInfo.loadIcon(manager);
-            apps.add(app);
-        } */
         apps = HomeActivity.getAppsList();
     }
 

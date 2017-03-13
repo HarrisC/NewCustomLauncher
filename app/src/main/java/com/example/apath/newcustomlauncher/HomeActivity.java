@@ -80,16 +80,6 @@ public class HomeActivity extends Activity {
                     break;
                 }
             }
-
-
-            /*switch(stringBuilder.toString()) {
-                case "camera":
-                    Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivity(i);
-                    break;
-                default:
-                    Toast.makeText(this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
-            }*/
         }
     }
 }

@@ -11,19 +11,14 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
 
 public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
 
-    Context context;
-    PackageManager pm;
-    STT stt;
-    ReadRss readRss;
+    private Context context;
+    private PackageManager pm;
+    private STT stt;
 
     public OnSwipeListener(Context context, PackageManager pm, STT stt) {
         this.context = context;
