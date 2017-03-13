@@ -31,9 +31,6 @@ public class NewsReader extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newsfeed_home);
 
-        ReadRss readRss = new ReadRss(this);
-        readRss.execute();
-
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
         newsfeed = (TextView) findViewById(R.id.newsFeed);
         tts=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
