@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -16,7 +17,6 @@ import java.util.Locale;
 public class NewsReader extends Activity {
 
     private TextToSpeech tts;
-    private TextView newsfeed;
     private static ArrayList<FeedItem> feedItems;
     private GestureDetectorCompat mDetector;
     private int feedCount = 0;
@@ -32,7 +32,6 @@ public class NewsReader extends Activity {
         setContentView(R.layout.newsfeed_home);
 
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
-        newsfeed = (TextView) findViewById(R.id.newsFeed);
         tts=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -42,8 +41,13 @@ public class NewsReader extends Activity {
             }
         });
 
-        toSpeak = "新聞, 向左滑動至上一則新聞, 向右至下一則, 輕觸讀出題目, 雙觸讀出內容";
-        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "INTRO");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        toSpeak = "新聞";
+        speak(toSpeak);
     }
 
     @Override
@@ -58,7 +62,6 @@ public class NewsReader extends Activity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2,
                                float velocityX, float velocityY) {
-            Intent I;
 
             switch (OnSwipeListener.getSlope(e1.getX(), e1.getY(), e2.getX(), e2.getY())) {
                 case 1:
@@ -69,10 +72,10 @@ public class NewsReader extends Activity {
                     Log.d(DEBUG_TAG, "left");
                     if (feedCount >= feedItems.size()) {
                         toSpeak = "最後一則新聞";
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "REACH_LEFTMOST");
+                        speak(toSpeak);
                     } else {
                         toSpeak = "下一則新聞";
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "REACH_LEFTMOST");
+                        speak(toSpeak);
                         feedCount++;
                     }
                     return true;
@@ -83,11 +86,11 @@ public class NewsReader extends Activity {
                     //previous news feed
                     Log.d(DEBUG_TAG, "right");
                     if (feedCount == 0) {
-                        String toSpeak = "第一則新聞";
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "REACH_RIGHTMOST");
+                        toSpeak = "第一則新聞";
+                        speak(toSpeak);
                     } else {
                         toSpeak = "上一則新聞";
-                        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "REACH_LEFTMOST");
+                        speak(toSpeak);
                         feedCount--;
                     }
                     return true;
@@ -100,7 +103,7 @@ public class NewsReader extends Activity {
             // speak the title
             Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
             String toSpeak = feedItems.get(feedCount).getTitle();
-            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, feedItems.get(feedCount).getTitle());
+            speak(toSpeak);
             return true;
         }
 
@@ -109,9 +112,13 @@ public class NewsReader extends Activity {
             //speak the descciption
             Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             String toSpeak = feedItems.get(feedCount).getDescription();
-            tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, feedItems.get(feedCount).getTitle());
+            speak(toSpeak);
             return true;
         }
+    }
+
+    private void speak(String toSpeak) {
+        tts.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "");
     }
 
     @Override

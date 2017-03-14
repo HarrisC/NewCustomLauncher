@@ -19,6 +19,7 @@ public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
     private Context context;
     private PackageManager pm;
     private STT stt;
+    private Intent I;
 
     public OnSwipeListener(Context context, PackageManager pm, STT stt) {
         this.context = context;
@@ -36,25 +37,21 @@ public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
         switch (getSlope(e1.getX(), e1.getY(), e2.getX(), e2.getY())) {
             case 1:
                 Log.d(DEBUG_TAG, "Up");
-                I = new Intent(Intent.ACTION_DIAL);
+                I = new Intent(context, DialActivity.class);
                 context.startActivity(I);
                 return true;
             case 2:
                 Log.d(DEBUG_TAG, "left");
-                I = AppsListActivity.manager.getLaunchIntentForPackage("com.htc.sense.mms");
-                context.startActivity(I);
                 return true;
             case 3:
                 Log.d(DEBUG_TAG, "down");
                 ReadRss readRss = new ReadRss(context);
                 readRss.execute();
-                Intent i = new Intent(context, NewsReader.class);
-                context.startActivity(i);
+                I = new Intent(context, NewsReader.class);
+                context.startActivity(I);
                 return true;
             case 4:
                 Log.d(DEBUG_TAG, "right");
-                I = AppsListActivity.manager.getLaunchIntentForPackage("com.android.settings");
-                context.startActivity(I);
                 return true;
         }
         return false;

@@ -30,13 +30,18 @@
 
         <activity
             android:name=".AppsListActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:theme="@android:style/Theme.Black"
             >
         </activity>
 
         <activity
             android:name=".NewsReader"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+
+        <activity
+            android:name=".DialActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar">
         </activity>
 
     </application>
