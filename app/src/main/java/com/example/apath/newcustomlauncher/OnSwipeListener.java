@@ -46,6 +46,8 @@ public class OnSwipeListener extends GestureDetector.SimpleOnGestureListener {
                 return true;
             case 3:
                 Log.d(DEBUG_TAG, "down");
+                ReadRss readRss = new ReadRss(context);
+                readRss.execute();
                 Intent i = new Intent(context, NewsReader.class);
                 context.startActivity(i);
                 return true;
