@@ -44,19 +44,12 @@ public class NewsReader extends Activity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        toSpeak = "新聞";
-        speak(toSpeak);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event){
         this.mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+    private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
         @Override
